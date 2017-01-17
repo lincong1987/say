@@ -1,60 +1,69 @@
 <template>
   <div class="home">
-    <div class="header">
-      <!--<img src="./header.png">-->
+    <ul class="navs">
+      <li class="nav-item">
+         FOLLOW
+      </li>
+      <li  class="nav-item">
+        HOT
+      </li>
+      <li  class="nav-item">
+        NEW
+      </li>
+    </ul>
+    <div class="content">
+      <ul>
+        <li v-for = "worditem in words" class="item">
+          <div class="user">
+            <img :src="worditem.avatar" class="avatar">
+            <span class="username">{{worditem.username}}</span>
+          </div>
+          <div class="wrd">
+            <span class="wrd-name">{{worditem.wrdName}}</span>
+            <span class="video-num">{{worditem.videoNum}}</span>
+          </div>
+          <div class="video">
+            <div class="content">
+
+            </div>
+            <div class="thumb">
+              <div class="like">{{worditem.like}}</div>
+              <div class="like">{{worditem.dislike}}</div>
+            </div>
+            <div class="info">
+              <span class="favorite">{{worditem.favoCount}}</span>
+              <span class="comments">{{worditem.commentCount}}</span>
+              <span class="share">{{worditem.shareCount}}</span>
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
-    <div class="buttons">
-      <router-link class="register" :class="{active:regActive}" to="/register" @click="gotoReg">Register</router-link>
-      <router-link class="login"  :class="{active:!regActive}"  to="/login">Login</router-link>
-    </div>
-    <router-view></router-view>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
     export default{
-      data(){
-        return {
-          regActive:true
-        }
-      },
-      methods:{
-        gotoReg(){
-          this.$router.push({path:'/register'})
-        }
-      }
+
     };
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
 .home
-  position fixed
-  left:0
-  top:0
-  bottom:0
+  position absolute
+  top: 120px
   width:100%
-  background #fff
-  .header
-    width:100%
-    height 70%
-
-  .buttons
-    position fixed
-    left:0
-    bottom 0
-    width:100%
-    height 140px
-    color: #fff
-    & > a
-      display: block
-      width: 100%
-      height 50%
-      background #fff
+  .navs
+    display: flex
+    width:80%
+    height 50px
+    line-height: 50px;
+    margin: 10px auto
+    background #fff
+    box-shadow 2px 2px 5px rgba(0,0,0,0.35)
+    .nav-item
+      flex: 1
+      text-align center
       color: #E91E63
-      font-size 5em
-      &.active
-        background #E91E63
-        color: #fff
-
 
 </style>

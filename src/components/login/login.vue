@@ -6,6 +6,7 @@
       <input placeholder="password" v-model="password">
       <input type="button" value="login" @click="login">
     </div>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -13,29 +14,30 @@
   import imageheader from "components/image-header/imageheader";
 
   const ERR_OK = 0;
-    export default{
-      data :function () {
-        return {
-          email:'',
-          password:''
-        }
-      },
 
-      methods:{
-         login() {
-            this.$http.post('/api/user/login' ,{
-              email:this.email,
-              password:this.password
-            }).then((response) => {
-              // response = response.body;
-              // if (response.errno === ERR_OK){
-              //   console.log(1)
-              // }
-              console.log(response.body)
-            });
-        }
-
+  export default{
+    data :function () {
+      return {
+        email:'',
+        password:''
+      }
     },
+
+    methods:{
+       login() {
+          this.$http.post('/api/user/login' ,{
+            email:this.email,
+            password:this.password
+          }).then((response) => {
+            response = response.body;
+            if (response.errno === ERR_OK){
+              console.log(response)
+              this.$router.push({ name: 'main' });
+            }
+          });
+      }
+
+  },
     components:{
       imageheader
     }

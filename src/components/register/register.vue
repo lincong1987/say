@@ -7,6 +7,8 @@
         <input placeholder="password" v-model="password">
         <input type="button" value="register" @click="register">
       </div>
+      <router-view></router-view>
+
     </div>
 </template>
 
@@ -54,6 +56,7 @@
     input
       margin-top 45px
       width: 100%
+      padding-bottom: 2px
       border-bottom 1px solid #a7a7a7
       font-weight:200
       outline none

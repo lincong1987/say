@@ -1,6 +1,6 @@
 <template>
  <div class="image-header">
-   <router-link  to="/home">
+   <router-link  to="/startup">
      <i class="back"> &#xe602;</i>
    </router-link>
    <img src="./header.png">
@@ -15,14 +15,8 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-  @font-face {
-    font-family: 'iconfont';  /* project id 220947 */
-    src: url('//at.alicdn.com/t/font_694n2u8ynrn3ik9.eot');
-    src: url('//at.alicdn.com/t/font_694n2u8ynrn3ik9.eot?#iefix') format('embedded-opentype'),
-      url('//at.alicdn.com/t/font_694n2u8ynrn3ik9.woff') format('woff'),
-      url('//at.alicdn.com/t/font_694n2u8ynrn3ik9.ttf') format('truetype'),
-      url('//at.alicdn.com/t/font_694n2u8ynrn3ik9.svg#iconfont') format('svg');
-  }
+
+  @import "../../common/stylus/iconfont.styl"
 
 .image-header
   position relative

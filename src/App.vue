@@ -1,24 +1,21 @@
 <template>
-  <div>
-    <home></home>
-  </div>
+  <startup></startup>
+    <!--<main></main>-->
 </template>
 
 <script>
-import home from 'components/home/home';
-import login from 'components/login/login';
-import register from 'components/register/register';
+import startup from 'components/startup/startup';
+import main from 'components/main/main';
+
   export default{
     data(){
       return {
-        isLogin:false,
-        isReg:false
+
       }
     },
     components: {
-      home,
-      login,
-      register
+      startup,
+      main
     }
   };
 </script>
