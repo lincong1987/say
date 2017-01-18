@@ -12,6 +12,7 @@
   "dependencies": {
     "babel-runtime": "^6.0.0",
     "body-parser": "^1.15.2",
+    "leanengine": "^1.2.2",
     "md5": "^2.0.0",
     "mint-ui": "^2.1.0",
     "mongodb": "^2.2.19",
