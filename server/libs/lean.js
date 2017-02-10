@@ -1,4 +1,6 @@
-import AV from 'leanengine'
+// import AV from 'leanengine'
+
+var AV = require ('leanengine')
 
 AV.init({
   appId: process.env.LEANCLOUD_APP_ID || '0rHOmlcHdGfEtc8uu4y6HQNr-gzGzoHsz',
@@ -8,4 +10,5 @@ AV.init({
 
 AV.Cloud.useMasterKey()
 
-export default AV
+module.exports= AV;
+// export default AV
