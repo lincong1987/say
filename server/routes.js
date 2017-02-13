@@ -4,7 +4,7 @@
 
 const usersRouter = require('./controllers/users')
 const wordsRouter = require('./controllers/words')
-// import usersRouter from './controllers/users'
+const videosRouter = require('./controllers/videos')
 
 module.exports = app =>{
   app.post('/api/users/signup',usersRouter.post.signup);
@@ -13,6 +13,11 @@ module.exports = app =>{
   app.get('/api/words',wordsRouter.get.getAllWords);
   app.post('/api/words',wordsRouter.post.addWord);
   app.delete('/api/words/:id',wordsRouter.delete.deleteWord);
+
+  app.get('/api/videos/new',videosRouter.get.getVideosNew);
+  app.get('/api/videos/hot',videosRouter.get.getVideosHot);
+  app.post('/api/videos',videosRouter.post.addVideo);
+  app.delete('/api/videos/:id',videosRouter.delete.deleteVideo);
 
 
 };

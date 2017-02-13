@@ -5,14 +5,14 @@ import Mint from 'mint-ui';
 import 'mint-ui/lib/style.css'
 
 import App from './App';
-import register from 'components/register/register';
-import startup from 'components/startup/startup';
-import login from 'components/login/login';
-import main from 'components/main/main';
-import home from 'components/home/home';
-import explore from 'components/explore/explore';
-import notification from 'components/notification/notification';
-import me from 'components/me/me';
+import register from 'components/views/register/register';
+import startup from 'components/views/startup/startup';
+import login from 'components/views/login/login';
+import main from 'components/views/main/main';
+import home from 'components/views/home/home';
+import explore from 'components/views/explore/explore';
+import notification from 'components/views/notification/notification';
+import me from 'components/views/me/me';
 
 Vue.use(VueRouter);
 Vue.use(VueResource);

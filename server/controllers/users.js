@@ -23,6 +23,7 @@ router.post.signup = (req,res) => {
     user.save().then(
       user.signUp()
         .then(loginedUser => {
+          res.saveCurrentUser(loginedUser);
           res.json({
             errno:0,
             loginedUser
@@ -41,6 +42,7 @@ router.post.login = (req,res) => {
   let password = req.body.password;
   AV.User.logIn(username,password)
     .then(loginedUser => {
+      res.saveCurrentUser(loginedUser);
       res.json(AV.User.current())
     },err=>{
       // 211,用户名不存在
