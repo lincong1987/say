@@ -1,24 +1,27 @@
 <template>
   <div class="main">
-    <mt-header fixed title="Say" slot="left">
+    <mt-header title="Say" slot="left">
       <router-link to="/search" slot="right">
         <mt-button icon="search"></mt-button>
       </router-link>
     </mt-header>
-    <ul class="tabs">
-        <router-link to="/main/home" class="tab-item" tag="li">
-          <i class="icon home">&#xe600;</i>
-        </router-link>
-        <router-link to="/main/explore" class="tab-item" tag="li">
-          <i class="icon explore">&#xe713;</i>
-        </router-link>
-        <router-link to="/main/notification" class="tab-item" tag="li">
-          <i class="icon notification">&#xe709;</i>
-        </router-link>
-        <router-link to="/main/me" class="tab-item" tag="li">
-          <i class="icon me">&#xe601;</i>
-        </router-link>
-    </ul>
+
+    <mt-tabbar v-model="selected">
+      <mt-tab-item id="home" @click.native="goTo('/main/home')">
+        <i slot="icon" class="icon">&#xe600;</i>
+        home
+      </mt-tab-item>
+      <mt-tab-item id="explore" @click.native="goTo('/main/explore')">
+        <i slot="icon" class="icon">&#xe600;</i>
+        explore
+      </mt-tab-item>
+      <mt-tab-item id="me" @click.native="goTo('/main/me')">
+        <i slot="icon" class="icon">&#xe600;</i>
+        me
+      </mt-tab-item>
+    </mt-tabbar>
+
+
     <keep-alive>
       <router-view></router-view>
     </keep-alive>
@@ -28,13 +31,17 @@
 <script type="text/ecmascript-6">
 
 export default{
-  components:{
+
+  methods:{
+    goTo:function (path) {
+      this.$router.replace(path);
+    }
   }
 };
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-  @import "../../common/stylus/iconfont.styl"
+  @import "../../../common/stylus/iconfont.styl"
 
   .main
     position fixed
@@ -47,7 +54,7 @@ export default{
       background-color #e91e63
     .mint-header-title,.mintui-search
       font-size 20px
-    .tabs
+/*    .tabs
       display flex
       position: absolute
       top: 40px
@@ -68,8 +75,9 @@ export default{
           color: rgba(255,255,255,0.5)
           &.router-link-active
             border-bottom 1px solid yellow
-            color: #fff
-
+            color: #fff*/
+    .mint-tabbar
+      z-index:999
 
 
 </style>

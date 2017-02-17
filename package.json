@@ -5,7 +5,7 @@
   "author": "jhh",
   "private": true,
   "scripts": {
-    "dev": "node server/app.js",
+    "dev": "node build/dev-server.js",
     "build": "node build/build.js",
     "lint": "eslint --ext .js,.vue src"
   },
@@ -13,6 +13,7 @@
     "babel-runtime": "^6.0.0",
     "body-parser": "^1.15.2",
     "connect": "^3.5.0",
+    "cors": "^2.8.1",
     "leanengine": "^1.2.2",
     "mint-ui": "^2.1.0",
     "vue": "^2.0.1",
@@ -28,6 +29,7 @@
     "babel-preset-es2015": "^6.0.0",
     "babel-preset-stage-2": "^6.0.0",
     "babel-register": "^6.0.0",
+    "better-scroll": "^0.1.12",
     "chalk": "^1.1.3",
     "connect-history-api-fallback": "^1.1.0",
     "css-loader": "^0.25.0",

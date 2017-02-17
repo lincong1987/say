@@ -38,7 +38,6 @@ const router = new VueRouter({
     },
     {
       path:'/main',
-      name:'main',
       component:main,
       children:[
         {

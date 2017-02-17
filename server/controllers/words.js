@@ -20,7 +20,7 @@ router.get.getAllWords = (req,res)=>{
 }
 router.post.addWord = (req,res)=>{
   let wordname = req.body.wordname;
-  let videos = req.body.videos;
+  let videosCount = req.body.videosCount;
   let word = new Word();
   //所有人可读可写
   var acl = new AV.ACL(req.currentUser);
@@ -29,7 +29,7 @@ router.post.addWord = (req,res)=>{
   word.setACL(acl);
 
   word.set('wordname',wordname);
-  word.set('videos',videos);
+  word.set('videosCount',videosCount);
   word.save().then(()=>{
     res.json('add success!');
   },err=>{

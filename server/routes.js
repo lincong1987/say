@@ -16,6 +16,7 @@ module.exports = app =>{
 
   app.get('/api/videos/new',videosRouter.get.getVideosNew);
   app.get('/api/videos/hot',videosRouter.get.getVideosHot);
+  app.get('/api/videos/:wordname',videosRouter.get.getVideosByWord);
   app.post('/api/videos',videosRouter.post.addVideo);
   app.delete('/api/videos/:id',videosRouter.delete.deleteVideo);
 

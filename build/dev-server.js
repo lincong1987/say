@@ -21,31 +21,6 @@ var bodyParser = require('body-parser')
 var mongoose = require('mongoose');
 
 app.use(bodyParser.json());
-var router = express.Router();
-
-
-//load route
-require('../server/routes/user')(router)
-
-app.use('/api',router)
-
-
-var MongoClient = require('mongodb').MongoClient;
-
-// Connection URL
-var url = 'mongodb://localhost:27017/say';
-
-
-// Use connect method to connect to the server
-mongoose.connect(url, function(err,db) {
-  // assert.equal(null, err);
-  // db.collection('user');
-  console.log("Connected successfully to server");
-
-  // db.close();
-});
-
-
 
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {

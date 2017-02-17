@@ -2,9 +2,10 @@
     <div class="register">
       <imageheader></imageHeader>
       <div class="content">
-        <input placeholder="nickname" v-model="nickname">
-        <input placeholder="email" v-model="email">
+        <input placeholder="username" v-model="username">
+        <!--<span>{{usernameTip}}</span>-->
         <input placeholder="password" v-model="password">
+        <!--<span>{{passwordTip}}</span>-->
         <input type="button" value="register" @click="register">
       </div>
       <router-view></router-view>
@@ -13,32 +14,38 @@
 </template>
 
 <script type="text/ecmascript-6" >
-    import imageheader from "components/image-header/imageheader";
+  import imageheader from "components/image-header/imageheader";
 
-    export default{
-      data :function () {
-        return {
-          nickname:'',
-          email:'',
-          password:''
-        }
-      },
-      methods:{
-        register(){
-          this.$http.post('/api/users',
-            {
-              nickname:this.nickname,
-              email:this.email,
-              password:this.password
-            }).then((response)=>{
-            console.log(response.body)
-          })
-        }
-      },
-      components:{
-        imageheader
+  export default{
+    data: function () {
+      return {
+        username: '',
+        password: '',
+        // usernameTip:'',
+        // passwordTip:''
       }
-    };
+    },
+    methods: {
+      register(){
+        this.$http.post('http://localhost:9096/api/users/signup',
+          {
+            username: this.username,
+            password: this.password
+          }).then((response) => {
+            response = response.body;
+            if (response.errno == '1') {
+              console.log('注册失败！');
+            } else {
+              console.log('注册成功！')
+              this.$router.push('/main');
+            }
+        })
+      }
+    },
+    components: {
+      imageheader
+    }
+  };
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
