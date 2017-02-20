@@ -7,7 +7,7 @@ const config = require ('../config/index');
 const bodyParser = require('body-parser')
 const connect = require('connect');
 const AV = require('./libs/lean');
-
+// const async = require('async');
 
 const app = express();
 //设置跨域访问
@@ -19,18 +19,20 @@ app.all('*', function(req, res, next) {
   res.header("Content-Type", "application/json;charset=utf-8");
   next();
 });
+
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(connect(AV.Cloud.CookieSession({ secret: 'saysecret', maxAge: 3600000, fetchUser: true })))
+// app.use(async());//不正确
 
 const routes = require('./routes')(app)
 
 
-module.exports = app.listen('9096', function (err) {
+module.exports = app.listen('9099', function (err) {
   if (err) {
     console.log(err)
     return
   }
-  console.log('listening 9096....')
+  console.log('listening 9099....')
   // console.log('Listening at http://localhost:' + port + '\n')
 })

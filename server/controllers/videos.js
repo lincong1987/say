@@ -11,13 +11,105 @@ const router = {
 
 const Video = AV.Object.extend('Video');
 
-router.get.getVideosNew = (req,res)=>{
-  let query = new AV.Query('Video');
-  //倒序
-  query.addDescending('createdAt');
-  query.find().then((results)=>{
-    res.json(results);
+router.get.getVideosNew = (req, res)=>{
+
+  let selectVideo = new AV.Query('Video');
+  let selectWord = new AV.Query('Word');
+  let words = [];
+
+  selectVideo.find().then((results)=> {
+
+
+    console.log(results);
+
+    results.forEach(function (result, i) {
+
+      var Abc = AV.Object.extend("Word");
+      var word = new Abc();
+
+      console.log("result.get('word').id", result.get('word').id);
+      console.log(word);
+      word.set("id", result.get('word').id);
+
+      words.push(word);
+    });
+
+
+
+    return AV.Object.fetchAll(words);
   })
+    .then(function (words) {
+
+
+      res.json(words);
+
+  })
+.catch(function (e) {
+    console.log(e);
+    res.json(e.res);
+  });
+
+};
+
+
+router.get.getVideosNew1 = (req,res)=>{
+  let query = new AV.Query('Video');
+  let query1 = new AV.Query('Word');
+  let wordIds = [];
+  let querytimes = 0;
+  let videos = [];
+
+
+
+  query.addDescending('createdAt');
+
+  query.find().then((results)=> {
+
+    results.forEach(function (n, i) {
+      wordIds.push(n.get('word').id);
+    });
+
+    res.json(wordIds);
+
+    return new AV.Query('Chapter').get(chapterIds[1]);
+
+
+
+
+
+
+
+
+    for (let obj of results) {
+      // id->word实例->存到results的word属性中
+      let wordId = obj.get('word').id;
+      query1.get("58aa826c0ce463006b111559").then((word) => {
+
+        let wordname = word.get('wordname');
+        let videosCount = word.get('videosCount');
+        obj.set('word',
+          {
+            'wordname': wordname,
+            'videosCount': videosCount
+          });
+
+        videos.push(obj);
+        console.log(obj, i++);
+
+      });
+    }
+
+    console.log(videos)
+
+
+     // res.json(videos);
+
+
+  }).catch(function(error) {
+    // catch 方法写在 Promise 链式的最后，可以捕捉到全部 error
+    console.error(error);
+  });
+
 }
 
 //浏览次数
@@ -60,33 +152,35 @@ router.post.addVideo = (req,res)=>{
   let views= req.body.views;
 
   let video = new Video();
-  // let word = AV.Object.createWithoutData('Word', wordId);
   let query = new AV.Query("Word");
-  // wordname->id
-  // id->word
-  query.equalTo('wordname','hello');
-  query.find().then((result)=>{
-    // wordId = result.objectId;
-    // let word = AV.Object.extend('Word');
-
-    // word.set('objectId',wordId);
-
-    let word= result;
-    // res.json(result)
+  // wordname->id,id->word
+  // query.equalTo('wordname','hello');
+  query.equalTo('wordname',wordname);
+  query.first().then((result)=>{
+    let wordId = result.id;
+    let word = AV.Object.createWithoutData('Word', wordId);
+    // let wordObj = {};
+    // word.fetch().then(()=>{
+    //   wordObj.wordname = word.get('wordname');
+    //   wordObj.videosCount = word.get('videosCount');
+    // })
     video.set('url',url);
+    // console.log(req.currentUser)
     // video.set('user',req.currentUser);
     video.set('user',user);
-    // video.set('word',word);//Pointer类型
+    video.set('word',word);//Pointer类型
     video.set('likeCount',likeCount);
     video.set('dislikeCount',dislikeCount);
     video.set('views',views);
 
+    video.save().then(()=>{
+      // res.json("add success!");
+      res.json(video)
+    },err=>{
+      res.json(err);
+    })
   })
-  video.save().then((video)=>{
-    res.json("add success!");
-  },err=>{
-    res.json(err);
-  })
+
 
 }
 
